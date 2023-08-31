@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": 0,
-    "scrollLeft": -38.33333181010358,
+    "scrollTop": -20.83333250549108,
+    "scrollLeft": -37.499998509884044,
     "zoomLevel": 1,
     "show": {
       "tableComment": true,
@@ -737,10 +737,10 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 544.1669,
           "top": 330.8331,
-          "zIndex": 249,
+          "zIndex": 251,
           "widthName": 60,
           "widthComment": 60,
           "color": "#FF9800"
@@ -956,15 +956,78 @@
         ],
         "ui": {
           "active": false,
-          "left": 545.8331,
-          "top": 534.9999,
-          "zIndex": 248,
+          "left": 532.4998,
+          "top": 554.1668,
+          "zIndex": 252,
           "widthName": 60,
           "widthComment": 60,
           "color": "#00FFEC"
         },
         "visible": true,
         "id": "5a83da20-99da-4aef-af76-c6e59b2e804f"
+      },
+      {
+        "name": "Like",
+        "comment": "",
+        "columns": [
+          {
+            "name": "id",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": true,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "7807b333-9350-48fd-98c5-e7cbe79fbbc5"
+          },
+          {
+            "name": "created_at",
+            "comment": "",
+            "dataType": "timestamp",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 67.0634765625,
+              "widthComment": 60,
+              "widthDataType": 61.9599609375,
+              "widthDefault": 60
+            },
+            "id": "64faccec-52a8-43bd-882d-81c1df3eb805"
+          }
+        ],
+        "ui": {
+          "active": true,
+          "left": 129.346,
+          "top": 590.9171,
+          "zIndex": 265,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": "#FF0000"
+        },
+        "visible": true,
+        "id": "46a95124-328a-48c0-9c12-58eba75caefe"
       }
     ],
     "indexes": []
