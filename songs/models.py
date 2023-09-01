@@ -1,9 +1,13 @@
+# Django
 from django.db import models
+
+# Inside Project
+from accounts.models import Listener
 
 
 class Genre(models.Model):
-    name = models.CharField(max_length=128)
-    info = models.TextField()
+    name = models.CharField(max_length=128, unique=True)
+    info = models.TextField(default=True)
     genre_img = models.ImageField()
 
     def __str__(self) -> str:
@@ -13,11 +17,10 @@ class Genre(models.Model):
 class Song(models.Model):
     name = models.CharField(max_length="128")
     cover_img = models.ImageField("song_cover_images/")
-    description = models.TextField()
+    description = models.TextField(default=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     audio_file = models.FieldFile(upload_to="song_files/")
     genres = models.ManyToManyField(Genre)
-    # artist =
 
     def __str__(self) -> str:
         return f"id: {self.id} || name: {self.name}"
@@ -26,10 +29,10 @@ class Song(models.Model):
 class Playlist(models.Model):
     name = models.CharField(max_length=128)
     cover_img = models.ImageField(upload_to="playlist_cover_images/")
-    description = models.TextField()
+    description = models.TextField(default=True, null=True)
     songs = models.ManyToManyField(Song)
     created_at = models.DateField(auto_now_add=True)
-    # owner =
+    owner = models.ForeignKey(Listener)
 
     def __str__(self) -> str:
         return f"Name: {self.name}"

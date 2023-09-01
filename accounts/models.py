@@ -1,18 +1,28 @@
+"""
+In the Next Version I should Create an CustomAbstractBaseUser
+then Artist & Listener will inheritance it !
+ 
+"""
+# Django Imports
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
+
+# Inside Project Imports
+from songs.models import Song
 
 
 class Artist(AbstractBaseUser):
     username = models.CharField(max_length=28, unique=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
-    email = models.EmailField()
-    gender = models.BooleanField()
-    bio = models.CharField(max_length=128)
+    email = models.EmailField(unique=True)
+    gender = models.BooleanField(default=True)
+    bio = models.TextField(blank=True, null=True)
     profile_img = models.ImageField(upload_to="artists_images/")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_alive = models.BooleanField(default=True)
+    songs = models.ManyToManyField(Song)
 
     USERNAME_FIELD = [
         "username",
@@ -27,8 +37,10 @@ class Listener(AbstractBaseUser):
     username = models.CharField(max_length=28, unique=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
-    email = models.EmailField()
-    gender = models.BooleanField()
+    email = models.EmailField(unique=True)
+    gender = models.BooleanField(default=True)
+    bio = models.TextField(blank=True, null=True)
+    profile_img = models.ImageField(upload_to="listeners_images/")
 
     USERNAME_FIELD = [
         "username",
