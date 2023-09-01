@@ -29,6 +29,7 @@ class Listener(AbstractBaseUser):
     last_name = models.CharField(max_length=128)
     email = models.EmailField()
     gender = models.BooleanField()
+    bio = models.TextField()
 
     USERNAME_FIELD = [
         "username",
