@@ -30,18 +30,22 @@ class CustomAbstractBaseUser(AbstractBaseUser):
         return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
 
 
-class Band(models.Model):
-    name = models.CharField(max_length=128)
-    started_at = models.DateTimeField()
-    end_at = models.DateTimeField()
+class Listener(CustomAbstractBaseUser):
+    USER_TYPE_CHOICES = (
+        ("F", "Free"),
+        ("P", "Premium"),
+    )
+    user_type = models.CharField(max_length=1, choices=USER_TYPE_CHOICES, default="F")
+    profile_img = models.ImageField(upload_to="accounts/ListenerImages/")
 
 
 class Artist(CustomAbstractBaseUser):
     songs = models.ManyToManyField(Song)
-    band = models.ForeignKey(Band)
-    profile_img = models.ImageField(upload_to="accounts/artist_images/")
+    band = models.ForeignKey("Band", on_delete=models.PROTECT)
+    profile_img = models.ImageField(upload_to="accounts/ArtistImages/")
 
 
-class Listener(CustomAbstractBaseUser):
-    is_premium = models.BooleanField(default=False)
-    profile_img = models.ImageField(upload_to="accounts/listener_images/")
+class Band(models.Model):
+    name = models.CharField(max_length=128)
+    started_at = models.DateTimeField()
+    end_at = models.DateTimeField()
