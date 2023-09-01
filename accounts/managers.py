@@ -1,11 +1,22 @@
-"""
-In the Next Version I should Create an AbstractBaseUserManager
-then ArtistManager & ListenerManager will inheritance it !
- 
-"""
-
 from django.contrib.auth.models import BaseUserManager
 from django.core.exceptions import ValidationError
+
+
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, password):
+        if not email:
+            raise ValueError("User Should have Email")
+
+        user = self.mode(email=email)
+        user.set_password(password)
+        return user
+
+    def create_superuser(self, email, password):
+        user = self.create_user(email, password)
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
 
 
 class ArtistManager(BaseUserManager):
@@ -44,6 +55,7 @@ class ArtistManager(BaseUserManager):
         return artist
 
 
+"""
 class ListenerManager(BaseUserManager):
     def create_user(
         self,
@@ -76,3 +88,5 @@ class ListenerManager(BaseUserManager):
         listener.set_password(password)
         listener.save(using=self._db)
         return listener
+
+"""
