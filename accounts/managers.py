@@ -1,5 +1,4 @@
 from django.contrib.auth.models import BaseUserManager
-from django.core.exceptions import ValidationError
 
 
 class CustomUserManager(BaseUserManager):
@@ -19,7 +18,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-class ArtistManager(BaseUserManager):
+"""class ArtistManager(BaseUserManager):
     def create_user(
         self,
         first_name,
@@ -53,7 +52,7 @@ class ArtistManager(BaseUserManager):
         artist.set_password(password)
         artist.save(using=self._db)
         return artist
-
+"""
 
 """
 class ListenerManager(BaseUserManager):
