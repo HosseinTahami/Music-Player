@@ -1,3 +1,9 @@
+"""
+In the Next Version I should Create an CustomAbstractBaseUserManager
+then Artist & Listener will inheritance it !
+ 
+"""
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 
@@ -6,7 +12,7 @@ class Artist(AbstractBaseUser):
     username = models.CharField(max_length=28, unique=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     gender = models.BooleanField()
     bio = models.CharField(max_length=128)
     profile_img = models.ImageField(upload_to="artists_images/")
@@ -27,7 +33,7 @@ class Listener(AbstractBaseUser):
     username = models.CharField(max_length=28, unique=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     gender = models.BooleanField()
     bio = models.TextField()
 
