@@ -13,8 +13,8 @@ class Artist(AbstractBaseUser):
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     email = models.EmailField(unique=True)
-    gender = models.BooleanField()
-    bio = models.CharField(max_length=128)
+    gender = models.BooleanField(default=True)
+    bio = models.TextField(blank=True, null=True)
     profile_img = models.ImageField(upload_to="artists_images/")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -34,8 +34,8 @@ class Listener(AbstractBaseUser):
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     email = models.EmailField(unique=True)
-    gender = models.BooleanField()
-    bio = models.TextField()
+    gender = models.BooleanField(default=True)
+    bio = models.TextField(blank=True, null=True)
     profile_img = models.ImageField(upload_to="listeners_images/")
 
     USERNAME_FIELD = [
