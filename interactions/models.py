@@ -20,8 +20,3 @@ class Like(models.Model):
     song = models.ForeignKey(Song)
     liker = models.ForeignKey(Listener)
     created_at = models.DateTimeField(auto_now_add=True)
-
-
-class comment(models.Model):
-    song = models.ForeignKey(Song)
-    created_at = models.DateTimeField(auto_now_add=True)
