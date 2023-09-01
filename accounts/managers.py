@@ -33,3 +33,29 @@ class ArtistManager(BaseUserManager):
         artist.set_password()
         artist.save(using=self._db)
         return artist
+
+
+class ListenerManager(BaseUserManager):
+    def create_user(
+        self, first_name, last_name, username, email, bio, gender, profile_img
+    ):
+        if not first_name:
+            raise ValidationError("Listener Users Should Have First Name.")
+        if not last_name:
+            raise ValidationError("Listener Users Should Have Last Name.")
+        if not (username or email):
+            raise ValidationError("Listener Users Should Have an Email or Username")
+
+        listener = self.model(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            email=email,
+            profile_img=profile_img,
+            bio=bio,
+            gender=gender,
+        )
+
+        listener.set_password()
+        listener.save(using=self._db)
+        return listener
