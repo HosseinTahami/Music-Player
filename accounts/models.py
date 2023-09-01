@@ -8,6 +8,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 
 # Inside Project Imports
+from songs.models import Song
 
 
 class CustomAbstractBaseUser(AbstractBaseUser):
@@ -36,8 +37,6 @@ class Band(models.Model):
 
 
 class Artist(CustomAbstractBaseUser):
-    from songs.models import Song
-
     songs = models.ManyToManyField(Song)
     band = models.ForeignKey(Band)
     profile_img = models.ImageField(upload_to="accounts/artist_images/")
