@@ -22,6 +22,8 @@ class CustomAbstractBaseUser(AbstractBaseUser):
     profile_img = models.ImageField(upload_to="users_images/")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]
