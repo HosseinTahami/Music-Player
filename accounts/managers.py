@@ -1,3 +1,9 @@
+"""
+In the Next Version I should Create an AbstractBaseUserManager
+then ArtistManager & ListenerManager will inheritance it !
+ 
+"""
+
 from django.contrib.auth.models import BaseUserManager
 from django.core.exceptions import ValidationError
 
