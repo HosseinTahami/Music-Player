@@ -36,6 +36,7 @@ class Listener(AbstractBaseUser):
     email = models.EmailField(unique=True)
     gender = models.BooleanField()
     bio = models.TextField()
+    profile_img = models.ImageField(upload_to="listeners_images/")
 
     USERNAME_FIELD = [
         "username",
