@@ -21,3 +21,15 @@ class Song(models.Model):
 
     def __str__(self) -> str:
         return f"id: {self.id} || name: {self.name}"
+
+
+class Playlist(models.Model):
+    name = models.CharField(max_length=128)
+    cover_img = models.ImageField(upload_to="playlist_cover_images/")
+    description = models.TextField()
+    songs = models.ManyToManyField(Song)
+    created_at = models.DateField(auto_now_add=True)
+    # owner =
+
+    def __str__(self) -> str:
+        return f"Name: {self.name}"
