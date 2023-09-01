@@ -46,7 +46,15 @@ class ArtistManager(BaseUserManager):
 
 class ListenerManager(BaseUserManager):
     def create_user(
-        self, first_name, last_name, username, email, bio, gender, profile_img, password
+        self,
+        first_name,
+        last_name,
+        username,
+        email,
+        bio,
+        gender,
+        profile_img,
+        password,
     ):
         if not first_name:
             raise ValidationError("Listener Users Should Have First Name.")
