@@ -21,7 +21,13 @@ class Like(models.Model):
     liker = models.ForeignKey(Listener)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return f"Name: {self.name}"
+
 
 class comment(models.Model):
     song = models.ForeignKey(Song)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f"Name: {self.name}"
