@@ -8,7 +8,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 
 # Inside Project Imports
-from Home.models import Song
+from songs.models import Song
 
 
 class Artist(AbstractBaseUser):
