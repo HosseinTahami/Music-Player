@@ -7,6 +7,8 @@ then Artist & Listener will inheritance it !
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 
+from Home.models import Song
+
 
 class Artist(AbstractBaseUser):
     username = models.CharField(max_length=28, unique=True)
@@ -19,6 +21,7 @@ class Artist(AbstractBaseUser):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_alive = models.BooleanField(default=True)
+    songs = models.ManyToManyField(Song)
 
     USERNAME_FIELD = [
         "username",
