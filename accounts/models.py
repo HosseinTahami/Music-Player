@@ -8,8 +8,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 
 # Inside Project Imports
-from songs.models import Song
-from accounts.models import Band
 
 
 class CustomAbstractBaseUser(AbstractBaseUser):
@@ -19,7 +17,6 @@ class CustomAbstractBaseUser(AbstractBaseUser):
     email = models.EmailField(unique=True)
     gender = models.BooleanField(default=True)
     bio = models.TextField(blank=True, null=True)
-    profile_img = models.ImageField(upload_to="users_images/")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_staff = models.BooleanField(default=False)
@@ -39,9 +36,13 @@ class Band(models.Model):
 
 
 class Artist(CustomAbstractBaseUser):
+    from songs.models import Song
+
     songs = models.ManyToManyField(Song)
     band = models.ForeignKey(Band)
+    profile_img = models.ImageField(upload_to="accounts/artist_images/")
 
 
 class Listener(CustomAbstractBaseUser):
     is_premium = models.BooleanField(default=False)
+    profile_img = models.ImageField(upload_to="accounts/listener_images/")
