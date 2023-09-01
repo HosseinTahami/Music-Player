@@ -9,6 +9,7 @@ from django.contrib.auth.models import AbstractBaseUser
 
 # Inside Project Imports
 from songs.models import Song
+from accounts.models import Band
 
 
 class CustomAbstractBaseUser(AbstractBaseUser):
@@ -22,25 +23,8 @@ class CustomAbstractBaseUser(AbstractBaseUser):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        abstract = True
-
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]
-
-    def __str__(self) -> str:
-        return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
-
-
-class Artist(CustomAbstractBaseUser):
-    songs = models.ManyToManyField(Song)
-
-    def __str__(self) -> str:
-        return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
-
-
-class Listener(CustomAbstractBaseUser):
-    is_premium = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
@@ -50,3 +34,12 @@ class Band(models.Model):
     name = models.CharField(max_length=128)
     started_at = models.DateTimeField()
     end_at = models.DateTimeField()
+
+
+class Artist(CustomAbstractBaseUser):
+    songs = models.ManyToManyField(Song)
+    band = models.ForeignKey(Band)
+
+
+class Listener(CustomAbstractBaseUser):
+    is_premium = models.BooleanField(default=False)
