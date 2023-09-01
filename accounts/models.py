@@ -21,3 +21,19 @@ class Artist(AbstractBaseUser):
 
     def __str__(self) -> str:
         return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
+
+
+class Listener(AbstractBaseUser):
+    username = models.CharField(max_length=28, unique=True)
+    first_name = models.CharField(max_length=128)
+    last_name = models.CharField(max_length=128)
+    email = models.EmailField()
+    gender = models.BooleanField()
+
+    USERNAME_FIELD = [
+        "username",
+        "email",
+    ]
+
+    def __str__(self) -> str:
+        return f"Name: {self.first_name} {self.last}"
