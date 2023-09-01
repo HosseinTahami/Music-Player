@@ -44,3 +44,9 @@ class Listener(CustomAbstractBaseUser):
 
     def __str__(self) -> str:
         return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
+
+
+class Band(models.Model):
+    name = models.CharField(max_length=128)
+    started_at = models.DateTimeField()
+    end_at = models.DateTimeField()
