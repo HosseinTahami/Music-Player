@@ -1,5 +1,7 @@
 from django.db import models
 
+from accounts.models import Listener
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=128)
@@ -17,7 +19,6 @@ class Song(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     audio_file = models.FieldFile(upload_to="song_files/")
     genres = models.ManyToManyField(Genre)
-    # artist =
 
     def __str__(self) -> str:
         return f"id: {self.id} || name: {self.name}"
@@ -29,7 +30,7 @@ class Playlist(models.Model):
     description = models.TextField()
     songs = models.ManyToManyField(Song)
     created_at = models.DateField(auto_now_add=True)
-    # owner =
+    owner = models.ForeignKey(Listener)
 
     def __str__(self) -> str:
         return f"Name: {self.name}"
