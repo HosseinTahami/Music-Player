@@ -9,43 +9,39 @@ from django.contrib.auth.models import AbstractBaseUser
 
 # Inside Project Imports
 from songs.models import Song
+from accounts.models import Band
 
 
-class Artist(AbstractBaseUser):
+class CustomAbstractBaseUser(AbstractBaseUser):
     username = models.CharField(max_length=28, unique=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     email = models.EmailField(unique=True)
     gender = models.BooleanField(default=True)
     bio = models.TextField(blank=True, null=True)
-    profile_img = models.ImageField(upload_to="artists_images/")
+    profile_img = models.ImageField(upload_to="users_images/")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_alive = models.BooleanField(default=True)
-    songs = models.ManyToManyField(Song)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
-    USERNAME_FIELD = [
-        "username",
-        "email",
-    ]
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["first_name", "last_name"]
 
     def __str__(self) -> str:
         return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
 
 
-class Listener(AbstractBaseUser):
-    username = models.CharField(max_length=28, unique=True)
-    first_name = models.CharField(max_length=128)
-    last_name = models.CharField(max_length=128)
-    email = models.EmailField(unique=True)
-    gender = models.BooleanField(default=True)
-    bio = models.TextField(blank=True, null=True)
-    profile_img = models.ImageField(upload_to="listeners_images/")
+class Band(models.Model):
+    name = models.CharField(max_length=128)
+    started_at = models.DateTimeField()
+    end_at = models.DateTimeField()
 
-    USERNAME_FIELD = [
-        "username",
-        "email",
-    ]
 
-    def __str__(self) -> str:
-        return f"Name: {self.first_name} {self.last}"
+class Artist(CustomAbstractBaseUser):
+    songs = models.ManyToManyField(Song)
+    band = models.ForeignKey(Band)
+
+
+class Listener(CustomAbstractBaseUser):
+    is_premium = models.BooleanField(default=False)
