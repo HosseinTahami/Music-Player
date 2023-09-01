@@ -3,9 +3,12 @@ In the Next Version I should Create an CustomAbstractBaseUserManager
 then Artist & Listener will inheritance it !
  
 """
+# Django Imports
 
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
+
+# Inside Project Imports
 
 from Home.models import Song
 
