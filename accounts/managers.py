@@ -10,7 +10,16 @@ from django.core.exceptions import ValidationError
 
 class ArtistManager(BaseUserManager):
     def create_user(
-        self, first_name, last_name, username, email, bio, gender, profile_img, is_alive
+        self,
+        first_name,
+        last_name,
+        username,
+        email,
+        bio,
+        gender,
+        profile_img,
+        is_alive,
+        password,
     ):
         if not first_name:
             raise ValidationError("Artist Users Should Have First Name.")
@@ -30,14 +39,14 @@ class ArtistManager(BaseUserManager):
             gender=gender,
         )
 
-        artist.set_password()
+        artist.set_password(password)
         artist.save(using=self._db)
         return artist
 
 
 class ListenerManager(BaseUserManager):
     def create_user(
-        self, first_name, last_name, username, email, bio, gender, profile_img
+        self, first_name, last_name, username, email, bio, gender, profile_img, password
     ):
         if not first_name:
             raise ValidationError("Listener Users Should Have First Name.")
@@ -56,6 +65,6 @@ class ListenerManager(BaseUserManager):
             gender=gender,
         )
 
-        listener.set_password()
+        listener.set_password(password)
         listener.save(using=self._db)
         return listener
