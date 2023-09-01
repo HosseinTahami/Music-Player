@@ -11,41 +11,70 @@ from django.contrib.auth.models import AbstractBaseUser
 from songs.models import Song
 
 
-class Artist(AbstractBaseUser):
+class CustomAbstractBaseUser(AbstractBaseUser):
     username = models.CharField(max_length=28, unique=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     email = models.EmailField(unique=True)
     gender = models.BooleanField(default=True)
     bio = models.TextField(blank=True, null=True)
-    profile_img = models.ImageField(upload_to="artists_images/")
+    profile_img = models.ImageField(upload_to="users_images/")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_alive = models.BooleanField(default=True)
-    songs = models.ManyToManyField(Song)
 
-    USERNAME_FIELD = [
-        "username",
-        "email",
-    ]
+    class Meta:
+        abstract = True
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["first_name", "last_name", "email"]
 
     def __str__(self) -> str:
         return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
 
 
-class Listener(AbstractBaseUser):
-    username = models.CharField(max_length=28, unique=True)
-    first_name = models.CharField(max_length=128)
-    last_name = models.CharField(max_length=128)
-    email = models.EmailField(unique=True)
-    gender = models.BooleanField(default=True)
-    bio = models.TextField(blank=True, null=True)
-    profile_img = models.ImageField(upload_to="listeners_images/")
-
-    USERNAME_FIELD = [
-        "username",
-        "email",
-    ]
+class Artist(CustomAbstractBaseUser):
+    songs = models.ManyToManyField(Song)
 
     def __str__(self) -> str:
-        return f"Name: {self.first_name} {self.last}"
+        return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
+
+
+class Listener(CustomAbstractBaseUser):
+    is_premium = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
+
+
+# class Artist(AbstractBaseUser):
+#     username = models.CharField(max_length=28, unique=True)
+#     first_name = models.CharField(max_length=128)
+#     last_name = models.CharField(max_length=128)
+#     email = models.EmailField(unique=True)
+#     gender = models.BooleanField(default=True)
+#     bio = models.TextField(blank=True, null=True)
+#     profile_img = models.ImageField(upload_to="artists_images/")
+#     created_at = models.DateField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#     is_alive = models.BooleanField(default=True)
+#     songs = models.ManyToManyField(Song)
+
+#     USERNAME_FIELD = "email"
+
+#     def __str__(self) -> str:
+#         return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
+
+
+# class Listener(AbstractBaseUser):
+#     username = models.CharField(max_length=28, unique=True)
+#     first_name = models.CharField(max_length=128)
+#     last_name = models.CharField(max_length=128)
+#     email = models.EmailField(unique=True)
+#     gender = models.BooleanField(default=True)
+#     bio = models.TextField(blank=True, null=True)
+#     profile_img = models.ImageField(upload_to="listeners_images/")
+
+#     USERNAME_FIELD = "email"
+
+#     def __str__(self) -> str:
+#         return f"Name: {self.first_name} {self.last}"
