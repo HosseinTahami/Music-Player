@@ -9,7 +9,7 @@ from songs.models import Song
 from managers import CustomUserManager
 
 
-class CustomAbstractBaseUser(AbstractBaseUser, PermissionMixin):
+class BaseUser(AbstractBaseUser, PermissionMixin):
     username = models.CharField(max_length=28, unique=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
@@ -30,7 +30,7 @@ class CustomAbstractBaseUser(AbstractBaseUser, PermissionMixin):
         return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
 
 
-class Listener(CustomAbstractBaseUser):
+class Listener(BaseUser):
     USER_TYPE_CHOICES = (
         ("F", "Free"),
         ("P", "Premium"),
@@ -39,7 +39,7 @@ class Listener(CustomAbstractBaseUser):
     profile_img = models.ImageField(upload_to="accounts/ListenerImages/")
 
 
-class Artist(CustomAbstractBaseUser):
+class Artist(BaseUser):
     songs = models.ManyToManyField(Song)
     band = models.ForeignKey("Band", on_delete=models.PROTECT)
     profile_img = models.ImageField(upload_to="accounts/ArtistImages/")

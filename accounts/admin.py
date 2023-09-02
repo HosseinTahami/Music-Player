@@ -3,7 +3,7 @@ from django.contrib import admin
 
 
 # Inside Project Imports
-from .models import Band, Artist, Listener
+from .models import Band, Artist, Listener, BaseUser
 
 
 @admin.register(Band)
@@ -13,3 +13,4 @@ class BandAdmin(admin.ModelAdmin):
 
 admin.site.register(Artist)
 admin.site.register(Listener)
+admin.site.register(BaseUser)
