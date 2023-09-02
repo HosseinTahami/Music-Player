@@ -1,15 +1,14 @@
 # Django Imports
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
-from django.contrib.auth.mixins import PermissionMixin
+from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 
 
 # Inside Project Imports
 from songs.models import Song
-from managers import CustomUserManager
+from .managers import CustomUserManager
 
 
-class BaseUser(AbstractBaseUser, PermissionMixin):
+class BaseUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=28, unique=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
@@ -37,6 +36,7 @@ class Listener(BaseUser):
     )
     user_type = models.CharField(max_length=1, choices=USER_TYPE_CHOICES, default="F")
     profile_img = models.ImageField(upload_to="accounts/ListenerImages/")
+    premium_left = models.IntegerField(default=0)
 
 
 class Artist(BaseUser):

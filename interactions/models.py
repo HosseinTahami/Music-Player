@@ -10,15 +10,15 @@ class Playlist(models.Model):
     description = models.TextField(default=True, null=True)
     songs = models.ManyToManyField(Song)
     created_at = models.DateField(auto_now_add=True)
-    owner = models.ForeignKey(Listener)
+    owner = models.ForeignKey(Listener, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f"Name: {self.name}"
 
 
 class Like(models.Model):
-    song = models.ForeignKey(Song)
-    liker = models.ForeignKey(Listener)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    liker = models.ForeignKey(Listener, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
@@ -26,7 +26,7 @@ class Like(models.Model):
 
 
 class comment(models.Model):
-    song = models.ForeignKey(Song)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
