@@ -6,7 +6,9 @@ from songs.models import Song
 
 class Playlist(models.Model):
     name = models.CharField(max_length=128)
-    cover_img = models.ImageField(upload_to="playlist_cover_images/")
+    cover_img = models.ImageField(
+        upload_to="playlist_cover_images/", blank=True, null=True
+    )
     description = models.TextField(default=True, null=True)
     songs = models.ManyToManyField(Song)
     created_at = models.DateField(auto_now_add=True)

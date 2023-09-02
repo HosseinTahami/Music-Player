@@ -22,14 +22,14 @@ class RegisterView(View):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             cd = form.cleaned_data
-        if cd["user_type"] == "L":
-            Listener.objects.create(
-                username=cd["username"], email=cd["email"], password=cd["password"]
-            )
-        else:
-            Artist.objects.create(
-                username=cd["username"], email=cd["email"], password=cd["password"]
-            )
+            if cd["user_type"] == "Listener":
+                Listener.objects.create(
+                    username=cd["username"], email=cd["email"], password=cd["password"]
+                )
+            else:
+                Artist.objects.create(
+                    username=cd["username"], email=cd["email"], password=cd["password"]
+                )
         return redirect("songs:home")

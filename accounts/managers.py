@@ -6,7 +6,7 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError("User Should have Email")
 
-        user = self.mode(email=email)
+        user = self.model(email=email)
         user.set_password(password)
         return user
 

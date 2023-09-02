@@ -5,33 +5,62 @@ from django import forms
 from .models import Listener, Artist
 
 
-class RegisterForm(forms.ModelForm):
+class RegisterForm(forms.Form):
     USER_TYPE_CHOICES = [
-        ("Artist", "A"),
-        ("Listener", "L"),
+        ("Artist", "Artist"),
+        ("Listener", "Listener"),
     ]
     user_type = forms.ChoiceField(
         choices=USER_TYPE_CHOICES,
-        widget=forms.RadioSelect(
+        widget=forms.Select(
             attrs={
                 "placeholder": "User Type",
-                "class": "form-control",
+                "class": "form-select m-3",
             }
         ),
     )
-    confirm_password = forms.CharField(
-        widget=forms.PasswordInput(
+
+    username = forms.CharField(
+        widget=forms.TextInput(
             attrs={
                 "placeholder": "Confirm Password",
-                "class": "form-control",
+                "class": "form-control form-control-lg m-3",
             }
         )
     )
 
-    class Meta:
-        model = Listener
-        fields = (
-            "email",
-            "username",
-            "password",
+    email = forms.EmailField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Example@email.com",
+                "class": "form-control form-control-lg m-3",
+            }
         )
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Confirm Password",
+                "class": "form-control form-control-lg m-3",
+            }
+        )
+    )
+
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Confirm Password",
+                "class": "form-control form-control-lg m-3",
+            }
+        )
+    )
+
+    # remember_me = forms.ChoiceField(
+    #     required=False,
+    #     widget=forms.CheckboxInput(
+    #         attrs={
+    #             "class": "checkbox-control",
+    #         }
+    #     ),
+    # )

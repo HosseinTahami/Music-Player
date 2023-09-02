@@ -35,14 +35,18 @@ class Listener(BaseUser):
         ("P", "Premium"),
     )
     user_type = models.CharField(max_length=1, choices=USER_TYPE_CHOICES, default="F")
-    profile_img = models.ImageField(upload_to="accounts/ListenerImages/")
+    profile_img = models.ImageField(
+        upload_to="accounts/ListenerImages/", blank=True, null=True
+    )
     premium_left = models.IntegerField(default=0)
 
 
 class Artist(BaseUser):
     songs = models.ManyToManyField(Song)
-    band = models.ForeignKey("Band", on_delete=models.PROTECT)
-    profile_img = models.ImageField(upload_to="accounts/ArtistImages/")
+    band = models.ForeignKey("Band", on_delete=models.PROTECT, default=None)
+    profile_img = models.ImageField(
+        upload_to="accounts/ArtistImages/", blank=True, null=True
+    )
 
 
 class Band(models.Model):

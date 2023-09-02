@@ -136,6 +136,6 @@ AUTH_USER_MODEL = "accounts.BaseUser"
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
-    "accounts.listener_backends.EmailOrUsernameAuthentication",
-    "accounts.artist_backends.EmailOrUsernameAuthentication",
+    "accounts.listener_backends.EmailOrUsernameAuthenticationBackend",
+    "accounts.artist_backends.EmailOrUsernameAuthenticationBackend",
 ]
