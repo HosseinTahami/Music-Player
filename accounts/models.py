@@ -9,15 +9,15 @@ from songs.models import Song
 from managers import CustomUserManager
 
 
-class CustomAbstractBaseUser(AbstractBaseUser, PermissionMixin):
+class BaseUser(AbstractBaseUser, PermissionMixin):
     username = models.CharField(max_length=28, unique=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
     email = models.EmailField(unique=True)
     gender = models.BooleanField(default=True)
     bio = models.TextField(blank=True, null=True)
-    created_at = models.DateField(auto_now_add=True, auto_now_add=True, editable=True)
-    updated_at = models.DateTimeField(auto_now=True, auto_now=True, editable=False)
+    created_at = models.DateField(auto_now_add=True, editable=True)
+    updated_at = models.DateTimeField(auto_now=True, editable=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -30,7 +30,7 @@ class CustomAbstractBaseUser(AbstractBaseUser, PermissionMixin):
         return f"Name: {self.first_name} {self.last_name} || Email:{self.email}"
 
 
-class Listener(CustomAbstractBaseUser):
+class Listener(BaseUser):
     USER_TYPE_CHOICES = (
         ("F", "Free"),
         ("P", "Premium"),
@@ -39,7 +39,7 @@ class Listener(CustomAbstractBaseUser):
     profile_img = models.ImageField(upload_to="accounts/ListenerImages/")
 
 
-class Artist(CustomAbstractBaseUser):
+class Artist(BaseUser):
     songs = models.ManyToManyField(Song)
     band = models.ForeignKey("Band", on_delete=models.PROTECT)
     profile_img = models.ImageField(upload_to="accounts/ArtistImages/")
