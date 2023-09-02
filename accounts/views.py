@@ -25,6 +25,11 @@ class RegisterView(View):
         if form.is_valid:
             cd = form.cleaned_data
         if cd["user_type"] == "L":
-            Listener.objects.create()
+            Listener.objects.create(
+                username=cd["username"], email=cd["email"], password=cd["password"]
+            )
         else:
-            pass
+            Artist.objects.create(
+                username=cd["username"], email=cd["email"], password=cd["password"]
+            )
+        return redirect("songs:home")
