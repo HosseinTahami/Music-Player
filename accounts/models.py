@@ -17,7 +17,7 @@ class CustomAbstractBaseUser(AbstractBaseUser, PermissionMixin):
     gender = models.BooleanField(default=True)
     bio = models.TextField(blank=True, null=True)
     created_at = models.DateField(auto_now_add=True, editable=True)
-    updated_at = models.DateTimeField(auto_now=True, auto_now=True, editable=False)
+    updated_at = models.DateTimeField(auto_now=True, editable=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
