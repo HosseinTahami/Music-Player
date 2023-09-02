@@ -1,5 +1,12 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand text-t" href="#">Music Player</a>
+        <a class="navbar-brand text-t" href="songs:home">Music Player</a>
+        {% if request.user %}
+        <a class="navbar-brand text-t" href="accounts:register">Logout</a>
+        {% else %}
+        <a class="navbar-brand text-t" href="#">Register</a>
+        <a class="navbar-brand text-t" href="#">Login</a>
+        {% endif %}
+
     </div>
 </nav>
