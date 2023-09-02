@@ -43,7 +43,7 @@ class Listener(BaseUser):
 
 class Artist(BaseUser):
     songs = models.ManyToManyField(Song)
-    band = models.ForeignKey("Band", on_delete=models.PROTECT, default=None)
+    band = models.ForeignKey("Band", on_delete=models.PROTECT, blank=True, null=True)
     profile_img = models.ImageField(
         upload_to="accounts/ArtistImages/", blank=True, null=True
     )

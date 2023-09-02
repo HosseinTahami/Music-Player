@@ -56,11 +56,25 @@ class RegisterForm(forms.Form):
         )
     )
 
-    # remember_me = forms.ChoiceField(
-    #     required=False,
-    #     widget=forms.CheckboxInput(
-    #         attrs={
-    #             "class": "checkbox-control",
-    #         }
-    #     ),
-    # )
+
+class LoginForm(forms.Form):
+    username_email = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "label": "Username or Email",
+                "placeholder": "Enter your email or username",
+                "class": "form-control form-control-lg m-3",
+            }
+        )
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Confirm Password",
+                "class": "form-control form-control-lg m-3",
+            }
+        )
+    )
+
+    remember_me = forms.BooleanField(required=False)

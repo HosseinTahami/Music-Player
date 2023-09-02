@@ -1,10 +1,13 @@
 # Django Imports
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login, logout, authenticate
 
 # Inside Project Imports
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 from .models import Listener, Artist
+from .utils import notification_system as ns
 
 
 class RegisterView(View):
@@ -18,6 +21,7 @@ class RegisterView(View):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
+        # ns(request, "went to Register page", "success")
         return render(request, self.template_name, {"form": form})
 
     def post(self, request, *args, **kwargs):
@@ -28,8 +32,48 @@ class RegisterView(View):
                 Listener.objects.create(
                     username=cd["username"], email=cd["email"], password=cd["password"]
                 )
+                ns(request, "Register as Listener User Successfully", "success")
             else:
                 Artist.objects.create(
                     username=cd["username"], email=cd["email"], password=cd["password"]
                 )
         return redirect("songs:home")
+
+
+class LoginView(View):
+    form_class = LoginForm
+    template_name = "accounts/login.html"
+
+    def get(self, request):
+        form = self.form_class
+        return render(request, self.template_name, {"form": form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+
+            user_1 = authenticate(
+                request, email=cd["username_email"], password=cd["password"]
+            )
+            user_2 = authenticate(
+                request, username=cd["username_email"], password=cd["password"]
+            )
+            if not user_1 is None:
+                login(request, user_1)
+                return redirect("songs:home")
+            elif not user_2 is None:
+                login(request, user_2)
+                return redirect("songs:home")
+        return render(request, self.template_name, {"form": form})
+
+
+class LogoutView(LoginRequiredMixin, View):
+    def get(self, request):
+        logout(request)
+        ns(request, "Logout Successfully", "success")
+        return redirect("accounts:login")
+
+
+class ProfileView(View):
+    pass

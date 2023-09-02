@@ -139,3 +139,5 @@ AUTHENTICATION_BACKENDS = [
     "accounts.listener_backends.EmailOrUsernameAuthenticationBackend",
     "accounts.artist_backends.EmailOrUsernameAuthenticationBackend",
 ]
+
+SESSION_SAVE_EVERY_REQUEST = True
