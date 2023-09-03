@@ -11,10 +11,12 @@ class EmailOrUsernameAuthenticationBackend:
     def authenticate(self, request, username=None, password=None):
         try:
             user = User.objects.get(email=username)
+            print(username)
 
         except User.DoesNotExist:
             try:
                 user = User.objects.get(username=username)
+                print(username)
             except User.DoesNotExist:
                 return None
 
