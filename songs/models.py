@@ -15,12 +15,15 @@ class Genre(models.Model):
 
 class Song(models.Model):
     title = models.CharField(max_length=60)
-    cover_img = models.ImageField("songs/SongCover/")
+    cover_img = models.ImageField("songs/images/SongCover/")
     description = models.TextField(default=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    audio_file = models.FileField(upload_to="songs/Audio/")
+    audio_file = models.FileField(upload_to="songs/audio/")
     genres = models.ManyToManyField(Genre)
-    band = models.ForeignKey("accounts.Band", on_delete=models.PROTECT)
+    band = models.ForeignKey(
+        "accounts.Band", on_delete=models.PROTECT, null=True, blank=True
+    )
+    artist = models.ManyToManyField("accounts.Artist")
 
     def __str__(self) -> str:
-        return f"id: {self.id} || name: {self.name}"
+        return f"id: {self.id} || title: {self.title}"

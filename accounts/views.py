@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.hashers import make_password
 
 # Inside Project Imports
 from .forms import RegisterForm, LoginForm
@@ -30,12 +31,16 @@ class RegisterView(View):
             cd = form.cleaned_data
             if cd["user_type"] == "Listener":
                 Listener.objects.create(
-                    username=cd["username"], email=cd["email"], password=cd["password"]
+                    username=cd["username"],
+                    email=cd["email"],
+                    password=make_password(cd["password"]),
                 )
                 ns(request, "Register as Listener User Successfully", "success")
             else:
                 Artist.objects.create(
-                    username=cd["username"], email=cd["email"], password=cd["password"]
+                    username=cd["username"],
+                    email=cd["email"],
+                    password=make_password(cd["password"]),
                 )
         return redirect("songs:home")
 
@@ -55,11 +60,12 @@ class LoginView(View):
             cd = form.cleaned_data
 
             user_1 = authenticate(
-                request, email=cd["username_email"], password=cd["password"]
+                request, username=cd["username_email"], password=cd["password"]
             )
             user_2 = authenticate(
                 request, username=cd["username_email"], password=cd["password"]
             )
+
             if user_1 != None:
                 print("-----Email-----------")
                 login(request, user_1)
