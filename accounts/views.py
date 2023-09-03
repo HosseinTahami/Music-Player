@@ -1,6 +1,7 @@
 # Django Imports
 from django.shortcuts import render, redirect
 from django.views import View
+from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.hashers import make_password
@@ -89,3 +90,10 @@ class LogoutView(LoginRequiredMixin, View):
 
 class ProfileView(View):
     pass
+
+
+class ArtistsView(ListView):
+    template_name = "accounts/artists.html"
+    model = Artist
+    context_object_name = "artists"
+    queryset = Artist.objects.all()

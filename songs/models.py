@@ -19,7 +19,9 @@ class Song(models.Model):
     description = models.TextField(default=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     audio_file = models.FileField(upload_to="songs/audio/")
-    genres = models.ManyToManyField(Genre)
+    genres = models.ManyToManyField(
+        Genre, related_name="songs", related_query_name="song"
+    )
     band = models.ForeignKey(
         "accounts.Band", on_delete=models.PROTECT, null=True, blank=True
     )

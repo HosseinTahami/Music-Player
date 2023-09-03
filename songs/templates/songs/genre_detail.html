@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block title %}Genre{% endblock %}
 
+{% block title %}
+{{ genre.name }}
+{% endblock %}
 {% block content %}
 
+<h1 class="text-center display-3">{{ genre.name }}</h1>
+<br>
+<br>
+<br>
 <div class="row m-3">
     {% for song in songs %}
     <div class="col-6">
@@ -16,7 +21,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ song.title }}</h5>
                         <p class="card-text">{{ genre.description|truncatewords:15 }}</p>
-                        <audio controls preload="none">
+                        <audio controls>
                             <source src="{{song.audio_file.url}}" type="audio/mp3">
                         </audio>
                         <br>
@@ -31,6 +36,4 @@
     </div>
     {% endfor %}
 </div>
-
-
 {% endblock %}

@@ -19,9 +19,16 @@ class GenreListView(ListView):
     queryset = Genre.objects.all()
 
 
-class GenreDetailView(DetailView):
-    template_name = "songs/genres_detail.html"
-    model = Genre
+class GenreDetailView(View):
+    def get(self, request, genre_id):
+        genre = Genre.objects.get(pk=genre_id)
+        songs = genre.songs.all()
+        context = {
+            "genre": genre,
+            "songs": songs,
+        }
+
+        return render(request, "songs/genre_detail.html", context)
 
 
 class SongListView(ListView):

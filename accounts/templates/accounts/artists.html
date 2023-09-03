@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Artists{% endblock %}
+
+{% block content %}
+<h1 class="text-center display-3">Artists</h1>
+<br>
+<br>
+<br>
+<div class="row m-3">
+    {% for artist in artists %}
+    <div class="col-6">
+        <div class="card mb-3 border-dark" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{artist.profile_img.url}}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ artist.first_name }}</h3>
+                        <p class="card-text"><strong>Bio:</strong><br>{{ artist.bio|truncatewords:15 }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
