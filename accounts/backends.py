@@ -1,6 +1,8 @@
 from accounts.models import BaseUser as User
 from django.contrib.auth.backends import ModelBackend
 
+from django.contrib.auth.mixins import PermissionMixin
+
 
 class EmailOrUsernameAuthenticationBackend(ModelBackend):
     """
