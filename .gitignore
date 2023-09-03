@@ -65,7 +65,9 @@ migrations
 migrations/
 .migrations
 **/migrations/
-
+**/images/
+**/audio/
+**/media/
 # Flask stuff:
 instance/
 .webassets-cache

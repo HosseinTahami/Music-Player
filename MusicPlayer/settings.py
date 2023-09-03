@@ -140,3 +140,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # SESSION_SAVE_EVERY_REQUEST = True
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"

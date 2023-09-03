@@ -7,7 +7,7 @@ from django.db import models
 class Genre(models.Model):
     name = models.CharField(max_length=128, unique=True)
     info = models.TextField(default=True)
-    genre_img = models.ImageField()
+    genre_img = models.ImageField(upload_to="songs/images/GenreCover/")
 
     def __str__(self) -> str:
         return f"Name: {self.name}"
