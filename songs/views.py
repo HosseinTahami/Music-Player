@@ -20,7 +20,8 @@ class GenreListView(ListView):
 
 
 class GenreDetailView(DetailView):
-    pass
+    template_name = "songs/genres_detail.html"
+    model = Genre
 
 
 class SongListView(ListView):

@@ -19,7 +19,11 @@
                         <audio controls>
                             <source src="{{song.audio_file.url}}" type="audio/mp3">
                         </audio>
-                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                        <br>
+                        <br>
+                        {% for genre in song.genres.all %}
+                        <span class="badge bg-secondary">{{ genre.name }}</span>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
