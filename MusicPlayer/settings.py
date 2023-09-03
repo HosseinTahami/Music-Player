@@ -136,6 +136,10 @@ AUTH_USER_MODEL = "accounts.BaseUser"
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
-    "accounts.listener_backends.EmailOrUsernameAuthentication",
-    "accounts.artist_backends.EmailOrUsernameAuthentication",
+    "accounts.backends.EmailOrUsernameAuthenticationBackend",
 ]
+
+# SESSION_SAVE_EVERY_REQUEST = True
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
