@@ -51,6 +51,7 @@ class LoginView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
+            print("----------form is valid-----------")
             cd = form.cleaned_data
 
             user_1 = authenticate(
@@ -59,12 +60,17 @@ class LoginView(View):
             user_2 = authenticate(
                 request, username=cd["username_email"], password=cd["password"]
             )
-            if not user_1 is None:
+            if user_1 != None:
+                print("-----Email-----------")
                 login(request, user_1)
                 return redirect("songs:home")
-            elif not user_2 is None:
+            elif user_2 != None:
+                print("-------Username----------")
                 login(request, user_2)
                 return redirect("songs:home")
+        print("----------None-----------")
+        print(cd["username_email"])
+        print(cd["password"])
         return render(request, self.template_name, {"form": form})
 
 

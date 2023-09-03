@@ -23,7 +23,7 @@ class RegisterForm(forms.Form):
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Confirm Password",
+                "placeholder": "Username",
                 "class": "form-control form-control-lg m-3",
             }
         )
@@ -41,7 +41,7 @@ class RegisterForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                "placeholder": "Confirm Password",
+                "placeholder": "Password",
                 "class": "form-control form-control-lg m-3",
             }
         )
@@ -71,7 +71,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                "placeholder": "Confirm Password",
+                "placeholder": "Password",
                 "class": "form-control form-control-lg m-3",
             }
         )

@@ -136,8 +136,7 @@ AUTH_USER_MODEL = "accounts.BaseUser"
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
-    "accounts.listener_backends.EmailOrUsernameAuthenticationBackend",
-    "accounts.artist_backends.EmailOrUsernameAuthenticationBackend",
+    "accounts.backends.EmailOrUsernameAuthenticationBackend",
 ]
 
-SESSION_SAVE_EVERY_REQUEST = True
+# SESSION_SAVE_EVERY_REQUEST = True
