@@ -1,3 +1,29 @@
+# Django Imports
 from django.shortcuts import render
+from django.views.generic import CreateView, ListView
+from django.urls import reverse_lazy
 
-# Create your views here.
+# Inside Project Imports
+from .models import Playlist
+from accounts.models import BaseUser
+
+
+class CreatePlaylistView(CreateView):
+    model = Playlist
+    fields = ["name", "cover_img", "description", "songs"]
+    template_name = "interactions/create_playlist.html"
+    success_url = reverse_lazy("songs:home")
+
+    def form_valid(self, form):
+        playlist = form.save(commit=False)
+        print(self.request.user.username)
+        playlist.owner = BaseUser.objects.get(username=self.request.user.username)
+        playlist.save()
+        return super().form_valid(form)
+
+
+class PlaylistView(ListView):
+    model = Playlist
+    queryset = Playlist.objects.all()
+    context_object_name = "playlists"
+    template_name = "interactions/playlists.html"

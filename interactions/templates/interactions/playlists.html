@@ -1,28 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Songs{% endblock %}
+{% block title %}Playlists{% endblock %}
 
 {% block content %}
 
 <div class="row m-3">
-    {% for song in songs %}
+    {% for playlist in playlists %}
     <div class="col-6">
         <div class="card mb-3 border-dark" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="{{song.cover_img.url}}" class="img-fluid rounded-start" alt="...">
+                    <img src="{{playlist.cover_img.url}}" class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">{{ song.title }}</h5>
+                        <h5 class="card-title">{{ playlist.name }}</h5>
                         <p class="card-text">{{ genre.description|truncatewords:15 }}</p>
-                        <audio controls preload="none">
-                            <source src="{{song.audio_file.url}}" type="audio/mp3">
-                        </audio>
                         <br>
-                        <br>
-                        {% for genre in song.genres.all %}
-                        <span class="badge bg-secondary">{{ genre.name }}</span>
+                        {% for song in playlist.songs.all %}
+                        <span class="badge bg-secondary">{{ song.title }}</span>
                         {% endfor %}
                     </div>
                 </div>

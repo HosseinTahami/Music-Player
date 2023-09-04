@@ -43,7 +43,7 @@ class Listener(BaseUser):
 class Artist(BaseUser):
     band = models.ForeignKey("Band", on_delete=models.PROTECT, blank=True, null=True)
     profile_img = models.ImageField(
-        upload_to="accounts/images/Artist", blank=True, null=True
+        upload_to="accounts/images/Artist", default = 'accounts/images/Artist/default.png'
     )
 
 

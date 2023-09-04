@@ -23,6 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("songs.urls", namespace="songs")),
     path("", include("accounts.urls", namespace="accounts")),
+    path("", include("interactions.urls", namespace="interactions")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
