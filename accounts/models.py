@@ -35,7 +35,8 @@ class Listener(BaseUser):
     )
     user_type = models.CharField(max_length=1, choices=USER_TYPE_CHOICES, default="F")
     profile_img = models.ImageField(
-        upload_to="accounts/images/Listener", blank=True, null=True
+        upload_to="accounts/images/Listener/",
+        default="accounts/images/Listener/default.png",
     )
     premium_left = models.IntegerField(default=0)
 
@@ -43,7 +44,7 @@ class Listener(BaseUser):
 class Artist(BaseUser):
     band = models.ForeignKey("Band", on_delete=models.PROTECT, blank=True, null=True)
     profile_img = models.ImageField(
-        upload_to="accounts/images/Artist", blank=True, null=True
+        upload_to="accounts/images/Artist", default="accounts/images/Artist/default.png"
     )
 
 
@@ -51,3 +52,6 @@ class Band(models.Model):
     name = models.CharField(max_length=128)
     started_at = models.DateTimeField(auto_now_add=True, editable=False)
     end_at = models.DateTimeField(null=True, blank=True, editable=True)
+
+    def __str__(self) -> str:
+        return f"Name: {self.name}"

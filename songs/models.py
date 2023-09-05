@@ -25,7 +25,7 @@ class Song(models.Model):
     band = models.ForeignKey(
         "accounts.Band", on_delete=models.PROTECT, null=True, blank=True
     )
-    artist = models.ManyToManyField("accounts.Artist")
+    artist = models.ManyToManyField("accounts.Artist", related_name="songs")
 
     def __str__(self) -> str:
         return f"id: {self.id} || title: {self.title}"
