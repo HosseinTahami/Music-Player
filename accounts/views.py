@@ -1,13 +1,14 @@
 # Django Imports
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.views import View
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.hashers import make_password
+from django.core.exceptions import ObjectDoesNotExist
 
 # Inside Project Imports
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, ArtistProfileForm, ListenerProfileForm
 from .models import Listener, Artist
 from .utils import notification_system as ns
 
@@ -88,8 +89,56 @@ class LogoutView(LoginRequiredMixin, View):
         return redirect("accounts:login")
 
 
-class ProfileView(View):
-    pass
+# class ProfileView(LoginRequiredMixin, View):
+#     def get(self, request, *args, **kwargs):
+#         if Artist.objects.get(username=self.request.user.username):
+#             user = Artist.objects.get(username=self.request.user.username)
+#             context = {"form": ArtistProfileForm(instance=user)}
+#         if Listener.objects.get(username=self.request.user):
+#             user = Listener.objects.get(username=self.request.user.username)
+#             context = {"form": ListenerProfileForm(instance=user)}
+#         return render("accounts/profile.html", context)
+
+#     def post(self, request, *args, **kwargs):
+#         if Artist.objects.get(username=self.request.user.username):
+#             form = ArtistProfileForm(request.POST)
+#         if Listener.objects.get(username=self.request.user.username):
+#             form = ArtistProfileForm(request.POST)
+#         if form.is_valid:
+#             form.save()
+
+
+class ProfileView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        try:
+            user = Artist.objects.get(username=self.request.user.username)
+            context = {"form": ArtistProfileForm(instance=user), "user": user}
+        except ObjectDoesNotExist:
+            try:
+                user = Listener.objects.get(username=self.request.user.username)
+                context = {"form": ListenerProfileForm(instance=user), "user": user}
+            except ObjectDoesNotExist:
+                return HttpResponse("User profile not found")
+
+        return render(request, "accounts/profile.html", context)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            user = Artist.objects.get(username=self.request.user.username)
+            form = ArtistProfileForm(request.POST, instance=user)
+        except ObjectDoesNotExist:
+            try:
+                user = Listener.objects.get(username=self.request.user.username)
+                form = ListenerProfileForm(request.POST, instance=user)
+            except ObjectDoesNotExist:
+                return HttpResponse("User profile not found")
+
+        if form.is_valid:
+            form.save()
+            return HttpResponse("Good")
+        else:
+            context = {"form": form}
+            return render(request, "accounts/profile.html", context)
 
 
 class ArtistsView(ListView):

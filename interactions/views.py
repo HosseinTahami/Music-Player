@@ -1,4 +1,6 @@
 # Django Imports
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView
 from django.urls import reverse_lazy
@@ -27,3 +29,11 @@ class PlaylistView(ListView):
     queryset = Playlist.objects.all()
     context_object_name = "playlists"
     template_name = "interactions/playlists.html"
+
+
+class YourPlaylistView(ListView):
+    model = Playlist
+    context_object_name = "playlists"
+
+    def get_queryset(self):
+        return Playlist.objects.filter(owner=self.request.user)

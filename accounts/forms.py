@@ -1,5 +1,6 @@
 # Django Imports
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 # Inside Project Imports
 from .models import Listener, Artist
@@ -78,3 +79,31 @@ class LoginForm(forms.Form):
     )
 
     remember_me = forms.BooleanField(required=False)
+
+
+class ArtistProfileForm(forms.ModelForm):
+    class Meta:
+        model = Artist
+        fields = [
+            "first_name",
+            "last_name",
+            "band",
+            "gender",
+            "profile_img",
+            "email",
+            "username",
+            "bio",
+        ]
+
+
+class ListenerProfileForm(forms.ModelForm):
+    class Meta:
+        model = Listener
+        fields = [
+            "first_name",
+            "last_name",
+            "gender",
+            "profile_img",
+            "email",
+            "username",
+        ]
