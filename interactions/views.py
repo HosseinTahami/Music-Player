@@ -2,7 +2,7 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DeleteView
 from django.urls import reverse_lazy
 
 # Inside Project Imports
@@ -37,3 +37,9 @@ class YourPlaylistView(ListView):
 
     def get_queryset(self):
         return Playlist.objects.filter(owner=self.request.user)
+
+
+class DeletePlaylistView(DeleteView):
+    model = Playlist
+    success_url = reverse_lazy("interactions:playlists")
+    template_name = "interactions/delete_playlist.html"
