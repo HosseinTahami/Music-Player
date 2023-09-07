@@ -34,6 +34,7 @@ class PlaylistView(ListView):
 class YourPlaylistView(ListView):
     model = Playlist
     context_object_name = "playlists"
+    template_name = "interactions/your_playlists.html"
 
     def get_queryset(self):
         return Playlist.objects.filter(owner=self.request.user)

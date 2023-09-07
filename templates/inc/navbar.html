@@ -14,6 +14,8 @@
             <a class="nav-link active" aria-current="page" href="{% url 'accounts:profile' request.user.id %}">
                 Profile: <i>{{ request.user.username }}</i>
             </a>
+            <a class="nav-link active" aria-current="page" href="{% url 'interactions:your_playlists' %}">your
+                playlists</a>
             {% else %}
             <a class="nav-link active" aria-current="page" href="{% url 'accounts:register' %}">Register</a>
             <a class="nav-link active" aria-current="page" href="{% url 'accounts:login' %}">Login</a>

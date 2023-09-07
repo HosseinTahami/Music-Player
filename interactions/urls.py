@@ -22,4 +22,5 @@ urlpatterns = [
         views.DeletePlaylistView.as_view(),
         name="delete_playlist",
     ),
+    path("your/playlists/", views.YourPlaylistView.as_view(), name="your_playlists"),
 ]
