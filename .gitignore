@@ -60,7 +60,14 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-
+/migrations/
+migrations
+migrations/
+.migrations
+**/migrations/
+**/images/
+**/audio/
+**/media/
 # Flask stuff:
 instance/
 .webassets-cache

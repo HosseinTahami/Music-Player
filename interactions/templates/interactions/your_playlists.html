@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Playlists{% endblock %}
+
+{% block content %}
+
+<div class="row m-3">
+    {% for playlist in playlists %}
+    <div class="col-6">
+        <div class="card mb-3 border-dark" style="max-width: 800px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{playlist.cover_img.url}}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title"><i><strong>{{ playlist.name }}</strong></i></h3>
+                        <br>
+                        <h6>Description:</h6>
+                        <p class="card-text">{{ playlist.description|truncatewords:5 }}</p>
+                        <h6>Songs:</h6>
+                        {% for song in playlist.songs.all %}
+                        <span class="badge bg-secondary">{{ song.title }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'interactions:delete_playlist' playlist.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{{ request.user.username }}{% endblock %}
+
+{% block content %}
+
+<section class="profile-section" style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="{{ user.profile_img.url }}" alt="avatar" class="rounded-circle img-fluid"
+                            style="width: 150px;">
+                        <h5 class="my-3">{{ user.first_name }} {{ user.last_name }}</h5>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fas fa-globe"> <strong>Username:</strong> {{user.username}}</i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fa fa-lg"> <strong>Email:</strong> {{user.email}}</i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-lg"> <strong>Band:</strong> {{user.band}}</i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-lg"><strong>Joined:</strong> {{user.created_at}}</i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-lg"><strong>Bio:</strong> <br>{{user.bio}}</i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form class="post-form" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">{{ form.first_name.label_tag }}</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ form.first_name }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">{{ form.last_name.label_tag }}</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ form.last_name }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">{{ form.email.label_tag }}</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ form.email }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Band</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{ form.band.label_tag }}
+                                    {{ form.band }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">{{ form.username.label_tag }}</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ form.username }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">{{ form.bio.label_tag }}</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ form.bio }}</p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-3 justify-content-end">
+                                    <input class="btn btn-primary justify-content-end" type="submit" value="Update">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            {% for song in user.songs.all %}
+            <div class="col-6">
+                <div class="card mb-3 border-dark" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{song.cover_img.url}}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ song.title }}</h5>
+                                <audio controls preload="none">
+                                    <source src="{{song.audio_file.url}}" type="audio/mp3">
+                                </audio>
+                                <br>
+                                <br>
+                                {% for genre in song.genres.all %}
+                                <span class="badge bg-secondary">{{ genre.name }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        $(document).on('submit', '#post-form', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'accounts:profile' request.user.id %}",
+                data: {
+                    first_name: $('#first_name').val(),
+                    last_name: $('#last_name').val(),
+                    bio: $('#bio').val(),
+                    email: $('#email').val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success: function (data) {
+                    alert(data);
+                },
+
+            });
+        });
+    </script>
+
+    {% endblock %}

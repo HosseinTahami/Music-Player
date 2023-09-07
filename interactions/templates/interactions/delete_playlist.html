@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Playlist{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <br>
+    <br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <p>Are You Sure You want to Delete the <i><strong>{{ object.name }}</strong></i> Playlist !?</p>
+        <input type="submit" value="Delete" class="btn btn-danger">
+    </form>
+</div>
+{% endblock %}
