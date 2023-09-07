@@ -16,8 +16,6 @@
                     <div class="card-body">
                         <h3 class="card-title"><i><strong>{{ playlist.name }}</strong></i></h3>
                         <br>
-                        <h6>Created by:</h6>
-                        <p>{{ playlist.owner.username }}</p>
                         <h6>Description:</h6>
                         <p class="card-text">{{ playlist.description|truncatewords:5 }}</p>
                         <h6>Songs:</h6>
@@ -34,6 +32,5 @@
     </div>
     {% endfor %}
 </div>
-
 
 {% endblock %}
