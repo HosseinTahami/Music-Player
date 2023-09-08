@@ -1,6 +1,6 @@
 # Django Imports
 from django import forms
-from django.utils.translation import gettext_lazy as _
+
 
 # Inside Project Imports
 from .models import Listener, Artist
