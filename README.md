@@ -1,6 +1,3 @@
-Apologies for the confusion. Here's the complete README file as a single block of text:
-
-```
 # MusicPlayer
 
 MusicPlayer is a simple music player website developed using Django.
