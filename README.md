@@ -1,2 +1,2 @@
 # MusicPlayer
-A simple music player website in django
+A music player platform with django
