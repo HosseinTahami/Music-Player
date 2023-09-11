@@ -34,7 +34,7 @@ MusicPlayer is a simple music player website developed using Django.
 4. Install the dependencies:
 
    ````shell
-
+   pip install -r requirements.txt
 
 5. Apply the database migrations:
 
@@ -45,7 +45,7 @@ MusicPlayer is a simple music player website developed using Django.
 6. Start the development server:
 
    ````shell
-
+   python manage.py runserver
 
 7. Open your web browser and visit http://localhost:8000 to access the MusicPlayer website.
 
