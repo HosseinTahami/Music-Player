@@ -1,3 +1,6 @@
+Apologies for the confusion. Here's the complete README file as a single block of text:
+
+```
 # MusicPlayer
 
 MusicPlayer is a simple music player website developed using Django.
@@ -16,3 +19,52 @@ MusicPlayer is a simple music player website developed using Django.
 
    ```shell
    git clone https://github.com/HosseinTahami/MusicPlayer.git
+   ```
+
+2. Create a virtual environment:
+
+   ````shell
+   cd MusicPlayer
+   python3 -m venv venv
+   ```
+
+3. Activate the virtual environment:
+
+   ````shell
+   source venv/bin/activate
+   ```
+
+4. Install the dependencies:
+
+   ````shell
+   pip install -r requirements.txt
+   ```
+
+5. Apply the database migrations:
+
+   ````shell
+   python manage.py migrate
+   ```
+
+6. Start the development server:
+
+   ````shell
+   python manage.py runserver
+   ```
+
+7. Open your web browser and visit http://localhost:8000 to access the MusicPlayer website.
+
+## Contributing
+
+Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+If you have any questions or inquiries, feel free to contact me at [hossesintahami2000@gmail.com].
+```
+
+You can now copy and paste this single block of text into your repository's README file.
