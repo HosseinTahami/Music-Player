@@ -28,10 +28,9 @@ MusicPlayer is a simple music player website developed using Django.
    python3 -m venv venv
    ```
 
-
 3. Activate the virtual environment:
 
-   ````shell
+   ```shell
    source venv/bin/activate
    ```
 
