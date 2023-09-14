@@ -10,7 +10,7 @@ MusicPlayer is a simple music player website developed using Django.
 - Music playback: Users can play, pause, and skip songs in the music player.⏯️⏸️
 - Responsive design: The website is optimized for different screen sizes.📱💻
 
-## Installation ⚒️
+## Installation ⚒️⚙️⛓️
 
 1. Clone the repository:
 
@@ -49,11 +49,11 @@ MusicPlayer is a simple music player website developed using Django.
 
 7. Open your web browser and visit http://localhost:8000 to access the MusicPlayer website.
 
-## Contributing
+## 🙌🏻 Contributing 🙌🏻
 
 Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request.
 
-## License 📝
+## License 📑
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
