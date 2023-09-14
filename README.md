@@ -61,5 +61,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have any questions or inquiries, feel free to contact me at [hossesintahami2000@gmail.com].
 ```
-
-You can now copy and paste this single block of text into your repository's README file.
