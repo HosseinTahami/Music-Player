@@ -20,9 +20,13 @@ MusicPlayer is a simple music player website developed using Django.
 
 2. Create a virtual environment:
 
-   ````shell
+   ```shell
    cd MusicPlayer
+   ```
+   
+   ```shell
    python3 -m venv venv
+   ```
 
 
 3. Activate the virtual environment:
