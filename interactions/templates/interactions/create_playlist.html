@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block title %} Create Playlist {% endblock %}
 {% block content %}
-
+<center>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input class="btn btn-primary" type="submit" value="Create">
 </form>
-
+</center>
 {% endblock %}
